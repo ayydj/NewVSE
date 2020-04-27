@@ -1,2 +1,2 @@
 rootProject.name='MicrophoneLayout'
-include ':app'
+include ':app', ':models', ':wear', ':aars'

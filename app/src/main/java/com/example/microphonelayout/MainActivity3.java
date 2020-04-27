@@ -2,65 +2,63 @@ package com.example.microphonelayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Locale;
-
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity3 extends AppCompatActivity {
-    private static final int REQ_CODE_SPEECH_INPUT = 100;
-    private TextView mVoiceInputTv;
-    private ImageButton micButton;
+
+    private Button button_second;
+    private Button Submit;
+    SharedPreferences prefs;
+    private EditText Name;
+    private EditText phoneNumber;
+    private EditText contactName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_first);
+        setContentView(R.layout.fragment_third);
 
-        mVoiceInputTv = (TextView) findViewById(R.id.voiceInput);
-        micButton = (ImageButton) findViewById(R.id.micButton);
-        micButton.setOnClickListener(new View.OnClickListener() {
+        button_second = (Button) findViewById(R.id.button_second);
+        Submit = (Button) findViewById(R.id.Submit);
+        Name = (EditText) findViewById(R.id.contact_name);
+        phoneNumber = (EditText) findViewById(R.id.Phone_Number);
+        contactName = (EditText) findViewById(R.id.contact_name2);
 
+        button_second.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startVoiceInput();
+                openMainActivity3();
             }
         });
-    }
 
-    private void startVoiceInput() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Please say safe word.");
-        try {
-            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
-        } catch (ActivityNotFoundException a) {
-
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case REQ_CODE_SPEECH_INPUT: {
-                if (resultCode == RESULT_OK && null != data) {
-                    ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    mVoiceInputTv.setText(result.get(0));
-                }
-                break;
+        Submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Submit.isPressed()) {
+                    prefs = getSharedPreferences("mypref", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("name", Name.getText().toString());
+                    editor.putString("phoneNumber", phoneNumber.getText().toString());
+                    editor.putString("contactName", contactName.getText().toString());
+                    editor.apply();
+                    Toast.makeText(MainActivity3.this,"Sumbit",Toast.LENGTH_SHORT).show();
             }
+            }
+        });
 
-        }
+    }
+
+
+
+    public void openMainActivity3() {
+        Intent intent = new Intent(this, MainActivity4.class);
+        startActivity(intent);
     }
 }

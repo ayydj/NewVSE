@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -25,20 +25,22 @@
     <string name="Phone_Number">Phone Number</string>
     <string name="Submit">Submit</string>
     <string name="Terms">Welcome!</string>
-    <string name="VSEtext">Kent State's Virtual Security Escort for Students</string>
+    <string name="VSEtext" tools:ignore="StringEscaping">Kent State\'s Virtual Security Escort for Students</string>
     <string name="checkBox1">I agree to Terms of Service</string>
     <string name="checkBox2">Always Allow Microphone Use</string>
-    <string name="Emergency">Emergency SOS Preview</string>
-    <string name="Message">I have made an emergency call from this approximate location. You are receiving this because you are made an emergency contact for them.</string>
+    <string name="Emergency">Emergency Message Preview</string>
+    <string name="Message">This is an emergency text from this approximate location. You are receiving this because you have been made an emergency contact for them.</string>
     <string name="Confirm">Confirm</string>
-
+    <string name="Listening">If you are in danger, click below</string>
+    <string name="MySettings">Settings</string>
+    <string name="web">https://maps.google.com/maps?q=</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="press">press</string>
     <string name="hint">hint</string>
-    <
+    <string name="Next">Next</string>
 
 
 </resources>
